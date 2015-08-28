@@ -291,31 +291,49 @@ chars = {' ': thumb,
         } 
 
 
-print('\n'*13)
-print('\033[13A', hands)
-#time.sleep(1)
-#print('\033[13A', left_pinky)
+def move_to_top():
+    print('\033[14A', end='')
+
+
+def clear(cursor_at_top=True):
+    '''
+    Clear some screen space. If ``cursor_at_top`` is True, return the cursor
+    to the top of the drawing area. Otherwise, leave it at the end.
+    '''
+    move_to_top()
+    print('\n\033[K'*14, end='')
+    if cursor_at_top:
+        move_to_top()
+
+
+def draw(cur_pos, text):
+    '''
+    Draw the text and hand positions based on the letter at the ``cur_pos``
+    in ``text``. Return letter in text at ``cur_pos``.
+    '''
+
+    letter = text[cur_pos]
+    print(text[cur_pos:] + '\033[K')
+    print(chars[letter].format(letter))
+    return letter
+
 ch = ''#getch()
-print('\033[13A', hands)
-#print(ch.lower(), ord(ch))
 
 text = 'The quick brown fox jumps over the lazy dog'
 cur_pos = 0
 
-#while ch.lower() in chars.keys():
+print('\n'*14)
+start = None
 while cur_pos < len(text):
-    letter = text[cur_pos]
-    #print('\033[13A', chars[ch.lower()])
-    print('\033[15A')
-    print(text[cur_pos:] + '\033[K')
-    print(chars[letter].format(letter))
+    clear()
+    letter = draw(cur_pos, text)
     ch = getch()
+    if start is None:
+        start = time.time()
     while letter != ch:
-        print('\033[1A\a')
-        print('\033[15A'+'\n\033[K'*14)
-        print('\033[15A')
+        print('\a', end='')
+        clear()
         time.sleep(0.1)
-        print(text[cur_pos:] + '\033[K')
-        print(chars[letter].format(letter))
+        letter = draw(cur_pos, text)
         ch = getch()
     cur_pos += 1
