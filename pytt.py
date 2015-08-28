@@ -1,5 +1,100 @@
+'''
+Python Teaches Typing,
+
+Levels:
+    1 - Home Row
+    1.1 - fj
+    1.2 - fghj
+    1.3 - dk
+    1.4 - dfghjk
+    1.5 - sl
+    1.6 - sdfghjkl
+    1.7 - a;
+    1.8 - asdfghjkl;
+    1.9 - Words with asdfhghjkl;
+
+    2 - Top Row
+    2.1 - ru
+    2.2 - rtyu
+    2.3 - ei
+    2.4 - ertyui
+    2.5 - wo
+    2.6 - wertyuio
+    2.7 - qp
+    2.8 - qwertyuiop
+    2.9 - 1+2, combination of word
+
+    3 - Bottom Row
+    3.1 - vm
+    3.2 - vbnm
+    3.3 - c,
+    3.4 - cvbnm,
+    3.5 - x.
+    3.6 - xcvbbnm,.
+    3.7 - z/
+    3.8 - zxcvbnm,./
+    3.9 - 1+2+3, combination of word
+
+    4 - Numbers
+    4.1 - 47
+    4.2 - 4567
+    4.3 - 38
+    4.4 - 345678
+    4.5 - 29
+    4.6 - 23456789
+    4.7 - 10
+    4.8 - `1234567890
+    4.9 - 1+2+3+4, combination of word
+
+    5 - Shift
+    5.1 - fFgGHhJj
+    5.2 - Words with capitalization (1+2+3+4)
+
+    6 - Punctuation
+    6.1 - $%^&
+    6.2 - #*
+    6.3 - #$%^&
+    6.4 - @(
+    6.5 - @#$%^&*(
+    6.6 - !)
+    6.7 - !@#$%^&*()
+    6.8 - -_=+
+    6.9 - {[]}\|
+    6.10 - :;'"
+    6.11 - ,<>./?
+
+Copyright (c) 2015, Wayne Werner
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+    1. Redistributions of source code must retain the above copyright notice,
+       this list of conditions and the following disclaimer.
+
+    2. Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+
+    3. Neither the name of the copyright holder nor the names of its
+       contributors may be used to endorse or promote products derived from
+       this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+'''
+import re
 import time
 import string
+import random
 
 hands = '''
            ||                   ||      
@@ -291,6 +386,14 @@ hand_positions = {' ': thumb,
                  }
 
 
+def make_some(population):
+    words = ''.join(random.choice(' jf') for x in range(100)).strip()
+    words = re.sub('\s+', ' ', words)
+    return words
+
+level_one_one = make_some(' jf')
+
+
 def move_to_top():
     print('\033[14A', end='')
 
@@ -352,4 +455,4 @@ def test(text):
 
 
 if __name__ == '__main__':
-    test('The quick brown fox jumps over the lazy dog')
+    test(level_one_one)
