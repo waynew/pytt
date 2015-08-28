@@ -337,3 +337,10 @@ while cur_pos < len(text):
         letter = draw(cur_pos, text)
         ch = getch()
     cur_pos += 1
+
+wordcount = text.count(' ')
+letters = len(text)
+seconds = (time.time()-start)
+minutes = seconds/60
+print('{:.2f} Words Per Minute - {:.2f} letters per second'
+      .format(wordcount/minutes, letters/seconds))
