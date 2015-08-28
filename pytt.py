@@ -324,6 +324,7 @@ cur_pos = 0
 
 print('\n'*14)
 start = None
+errors = 0
 while cur_pos < len(text):
     clear()
     letter = draw(cur_pos, text)
@@ -331,6 +332,7 @@ while cur_pos < len(text):
     if start is None:
         start = time.time()
     while letter != ch:
+        errors += 1
         print('\a', end='')
         clear()
         time.sleep(0.1)
@@ -344,3 +346,4 @@ seconds = (time.time()-start)
 minutes = seconds/60
 print('{:.2f} Words Per Minute - {:.2f} letters per second'
       .format(wordcount/minutes, letters/seconds))
+print('{:d} errors'.format(errors), '- Great Job!' if not errors else '')
