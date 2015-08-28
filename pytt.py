@@ -337,6 +337,8 @@ while cur_pos < len(text):
         clear()
         time.sleep(0.1)
         letter = draw(cur_pos, text)
+        clear()
+        letter = draw(cur_pos, text)
         ch = getch()
     cur_pos += 1
 
