@@ -318,34 +318,38 @@ def draw(cur_pos, text):
     print(hand_positions[letter].format(letter))
     return letter
 
-ch = ''
-text = 'The quick brown fox jumps over the lazy dog'
-cur_pos = 0
 
-print('\n'*14)
-start = None
-errors = 0
-while cur_pos < len(text):
-    clear()
-    letter = draw(cur_pos, text)
-    ch = getch()
-    if start is None:
-        start = time.time()
-    while letter != ch:
-        errors += 1
-        print('\a', end='')
-        clear()
-        time.sleep(0.1)
-        letter = draw(cur_pos, text)
+def test(text):
+    ch = ''
+    cur_pos = 0
+    print('\n'*14)
+    start = None
+    errors = 0
+    while cur_pos < len(text):
         clear()
         letter = draw(cur_pos, text)
         ch = getch()
-    cur_pos += 1
+        if start is None:
+            start = time.time()
+        while letter != ch:
+            errors += 1
+            print('\a', end='')
+            clear()
+            time.sleep(0.1)
+            letter = draw(cur_pos, text)
+            clear()
+            letter = draw(cur_pos, text)
+            ch = getch()
+        cur_pos += 1
 
-wordcount = text.count(' ')
-letters = len(text)
-seconds = (time.time()-start)
-minutes = seconds/60
-print('{:.2f} Words Per Minute - {:.2f} letters per second'
-      .format(wordcount/minutes, letters/seconds))
-print('{:d} errors'.format(errors), '- Great Job!' if not errors else '')
+    wordcount = text.count(' ')
+    letters = len(text)
+    seconds = (time.time()-start)
+    minutes = seconds/60
+    print('{:.2f} Words Per Minute - {:.2f} letters per second'
+          .format(wordcount/minutes, letters/seconds))
+    print('{:d} errors'.format(errors), '- Great Job!' if not errors else '')
+
+
+if __name__ == '__main__':
+    test('The quick brown fox jumps over the lazy dog')
