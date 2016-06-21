@@ -91,10 +91,11 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 '''
-import re
-import time
-import string
+import os
 import random
+import re
+import string
+import time
 
 hands = '''
            ||                   ||      
@@ -387,9 +388,16 @@ hand_positions = {' ': thumb,
 
 
 def make_some(population):
-    words = ''.join(random.choice(population) for x in range(100)).strip()
+    words = ''.join(random.choice(population) for _ in range(100)).strip()
     words = re.sub('\s+', ' ', words)
     return words
+
+
+def make_some_from_file(filename):
+    with open(os.path.join(os.path.dirname(__file__), filename)) as f:
+        words = [line.strip() for line in f]
+        words = ' '.join(random.choice(words) for _ in range(50))
+        return words
 
 level_one_one = make_some(' jf')
 level_one_two = make_some(' fghj')
@@ -398,7 +406,8 @@ level_one_four = make_some(' dfghjk')
 level_one_five = make_some(' sl')
 level_one_six = make_some(' sdfghjkl')
 level_one_seven = make_some(' a;')
-level_one_eight = make_some(' asdfghjkl;;')
+level_one_eight = make_some(' asdfghjkl;')
+level_one_nine =  make_some_from_file('asdfghjkl.txt')
 
 '''
     1.9 - Words with asdfhghjkl;
@@ -467,4 +476,4 @@ def test(text):
 
 
 if __name__ == '__main__':
-    test(level_one_two)
+    test(level_one_nine)
