@@ -387,11 +387,23 @@ hand_positions = {' ': thumb,
 
 
 def make_some(population):
-    words = ''.join(random.choice(' jf') for x in range(100)).strip()
+    words = ''.join(random.choice(population) for x in range(100)).strip()
     words = re.sub('\s+', ' ', words)
     return words
 
 level_one_one = make_some(' jf')
+level_one_two = make_some(' fghj')
+level_one_three = make_some(' dk')
+level_one_four = make_some(' dfghjk')
+level_one_five = make_some(' sl')
+level_one_six = make_some(' sdfghjkl')
+level_one_seven = make_some(' a;')
+level_one_eight = make_some(' asdfghjkl;;')
+
+'''
+    1.9 - Words with asdfhghjkl;
+'''
+
 
 
 def move_to_top():
@@ -455,4 +467,4 @@ def test(text):
 
 
 if __name__ == '__main__':
-    test(level_one_one)
+    test(level_one_two)
